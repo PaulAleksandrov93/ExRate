@@ -1,0 +1,18 @@
+2023-01-21 19:00:03,752 [INFO] - TestApi:Started update for: 840=>980
+2023-01-21 19:00:03,753 [DEBUG] - TestApi:rate before: 1
+2023-01-21 19:00:03,758 [DEBUG] - TestApi:rate after: 1
+2023-01-21 19:00:03,759 [INFO] - TestApi:Finished update for: 840=>980
+2023-01-21 20:56:34,893 [INFO] - TestApi:Started update for: 840=>980
+2023-01-21 20:56:34,894 [DEBUG] - TestApi:rate before: 1
+2023-01-21 20:56:34,899 [DEBUG] - TestApi:rate after: 1
+2023-01-21 20:56:34,899 [INFO] - TestApi:Finished update for: 840=>980
+2023-01-21 20:58:28,344 [INFO] - TestApi:Started update for: 840=>980
+2023-01-21 20:58:28,345 [DEBUG] - TestApi:rate before: XRate(840=>980): 1.0
+2023-01-21 20:58:28,350 [DEBUG] - TestApi:rate after: XRate(840=>980): 1.01
+2023-01-21 20:58:28,351 [INFO] - TestApi:Finished update for: 840=>980
+2023-01-21 20:59:58,685 [INFO] - TestApi:Started update for: 840=>980
+2023-01-21 20:59:58,690 [INFO] - TestApi:Finished update for: 840=>980
+2023-01-21 21:01:21,426 [INFO] - TestApi:Started update for: 840=>980
+2023-01-21 21:01:21,427 [DEBUG] - TestApi:rate before: XRate(840=>980): 1.0
+2023-01-21 21:01:21,432 [DEBUG] - TestApi:rate after: XRate(840=>980): 1.01
+2023-01-21 21:01:21,432 [INFO] - TestApi:Finished update for: 840=>980
