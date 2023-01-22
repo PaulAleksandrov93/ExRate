@@ -29,21 +29,21 @@ def update_xrates(from_currency, to_currency):
     log.info("Finished updated for: %s=>%s" % (from_currency, to_currency))
 
     
-    def get_pbank_rate(from_currency):
-        response = requests.get("https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11")
-        response_json = response.json()
-        log.debug("PBank response: %s" % response_json)
-        usd_rate = find_usd_rate(response_json)
+def get_pbank_rate(from_currency):
+    response = requests.get("https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11")
+    response_json = response.json()
+    log.debug("PBank response: %s" % response_json)
+    usd_rate = find_usd_rate(response_json)
 
-        return usd_rate
+    return usd_rate
 
 
-    def find_usd_rate(response_data):
-        for e in response_data:
-            if e["ccy"] == "USD":
-                return float(e["sale"])
+def find_usd_rate(response_data):
+    for e in response_data:
+        if e["ccy"] == "USD":
+            return float(e["sale"])
 
-        raise ValueError("Invalid PBank response: USD not found")
+    raise ValueError("Invalid PBank response: USD not found")
 
 
 
