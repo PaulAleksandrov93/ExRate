@@ -1,9 +1,9 @@
 import unittest
 
-import test_api
+import api.test_api as test_api
 import models
-import pbank_api
-import cbr_api
+import api.pbank_api as pbank_api
+import api.cbr_api as cbr_api
 
 
 class Test(unittest.TestCase):
@@ -36,7 +36,7 @@ class Test(unittest.TestCase):
         xrate = models.XRate.get(from_currency=840, to_currency=643)
         updated_before = xrate.updated
         self.assertEqual(xrate.rate, 1.0)
-        cbr_api.update_xrates(840, 643)
+        cbr_api.Api().update_rate(840, 643)
         xrate = models.XRate.get(from_currency=840, to_currency=643)
         updated_after = xrate.updated
 
