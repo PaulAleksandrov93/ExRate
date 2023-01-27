@@ -1,49 +1,32 @@
-import requests
+from api import _Api 
 
-from models import XRate, peewee_datetime
+class Api(_Api):
+    def __init__(self):
+        super().__init__("PBankApi")
 
-from config import logging, LOGGER_CONFIG
+    def _update_rate(self, xrate):
+        rate = self._get_pbank_rate(xrate.from_currency)
+        return rate
 
-log = logging.getLogger("PBankApi")
-fh = logging.FileHandler(LOGGER_CONFIG["file"])
-fh.setLevel(LOGGER_CONFIG["level"])
-fh.setFormatter(LOGGER_CONFIG["formatter"])
-log.addHandler(fh)
-log.setLevel(LOGGER_CONFIG["level"])
+    def _get_pbank_rate(self, from_currency):
+        response = self._send_request(url="https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11", method="get")
 
+        response_json = response.json()
+        self.log.debug("Pbank response: %s" % response_json)
+        rate = self._find_rate(response_json, from_currency)
 
-def update_xrates(from_currency, to_currency):
-    log.info("Started update for: %s=>%s" % (from_currency, to_currency))
-    # Получение курса из БД
-    xrate = XRate.select().where(XRate.from_currency == from_currency,
-                                XRate.to_currency == to_currency).first()
+        return rate
 
-    log.debug("rate before: %s", xrate)
-    # получение нового значения курса от ПБанка и сохранение в объект xrate
-    xrate.rate = get_pbank_rate(from_currency)
-    # Обновление поля updated
-    xrate.updated = peewee_datetime.datetime.now()
-    xrate.save()
+    def _find_rate(self, response_data, from_currency):
+        pbank_aliases_map = {840: "USD"}
+        currency_pbank_alias = pbank_aliases_map[from_currency]
+        for i in response_data:
+            if i['ccy']  == currency_pbank_alias:
+                return float(i["sale"])
 
-    log.debug("rate after: %s", xrate)
-    log.info("Finished updated for: %s=>%s" % (from_currency, to_currency))
-
-    
-def get_pbank_rate(from_currency):
-    response = requests.get("https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11")
-    response_json = response.json()
-    log.debug("PBank response: %s" % response_json)
-    usd_rate = find_usd_rate(response_json)
-
-    return usd_rate
+        raise ValueError("Invalid PBank response: {currency_pbank_alias} not found")
 
 
-def find_usd_rate(response_data):
-    for e in response_data:
-        if e["ccy"] == "USD":
-            return float(e["sale"])
-
-    raise ValueError("Invalid PBank response: USD not found")
 
 
 

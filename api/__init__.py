@@ -1,5 +1,5 @@
 
-from config import logging, LOGGER_CONFIG
+from config import logging, LOGGER_CONFIG, HTTP_TIMEOUT
 from models import XRate, peewee_datetime, ApiLog, ErrorLog
 import traceback, requests
 
@@ -8,7 +8,7 @@ fh.setLevel(LOGGER_CONFIG["level"])
 fh.setFormatter(LOGGER_CONFIG["formatter"])
 
 
-
+#Базовый класс
 class _Api:
     def __init__(self, logger_name):
         self.log = logging.getLogger(logger_name)
@@ -48,4 +48,4 @@ class _Api:
             log.save()
 
     def _send(self, url, method, data=None, headers=None):
-        return requests.request(method=method, url=url, headers=headers, data=data, timeout=15)  
+        return requests.request(method=method, url=url, headers=headers, data=data, timeout=HTTP_TIMEOUT)  

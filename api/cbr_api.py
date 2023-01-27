@@ -1,8 +1,6 @@
 # Используем стандартную библиотеку XML
 import xml.etree.ElementTree as ET
 
-import requests
-
 from api import _Api 
 
 class Api(_Api):
@@ -14,7 +12,7 @@ class Api(_Api):
         return rate
 
     def _get_cbr_rate(self, from_currency):
-        response = requests.get("http://www.cbr.ru/scripts/XML_daily.asp")
+        response = self._send_request(url="http://www.cbr.ru/scripts/XML_daily.asp", method="get")
         self.log.debug("response.encoding: %s" % response.encoding)
         response_text = response.text
         self.log.debug("response.text: %s" % response_text)
@@ -26,7 +24,7 @@ class Api(_Api):
         root = ET.fromstring(response_text)
         valutes = root.findall("Valute")
 
-        cbr_valute_map = {840: "USD", 643: "RUB"}
+        cbr_valute_map = {840: "USD"}
         currency_cbr_alias = cbr_valute_map[from_currency]
 
         for valute in valutes:

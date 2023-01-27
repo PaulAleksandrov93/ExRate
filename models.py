@@ -54,7 +54,7 @@ class ErrorLog(_Model):
 
 
 def init_db():
-    XRate.drop_tables()
+    XRate.drop_table()
     XRate.create_table()
     XRate.create(from_currency=840, to_currency=980, rate=1)
     XRate.create(from_currency=840, to_currency=643, rate=1)
