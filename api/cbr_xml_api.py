@@ -5,7 +5,7 @@ from api import _Api
 
 class Api(_Api):
     def __init__(self):
-        super().__init__("CbrApi")
+        super().__init__("CbrXmlApi")
 
     def _update_rate(self, xrate):
         rate = self._get_cbr_rate(xrate.from_currency)

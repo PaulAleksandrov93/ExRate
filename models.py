@@ -58,6 +58,8 @@ def init_db():
     XRate.create_table()
     XRate.create(from_currency=840, to_currency=980, rate=1)
     XRate.create(from_currency=840, to_currency=643, rate=1)
+    XRate.create(from_currency=978, to_currency=980, rate=1)
+    XRate.create(from_currency=1000, to_currency=840, rate=1)
     
     for i in (ApiLog, ErrorLog):
         i.drop_table()
