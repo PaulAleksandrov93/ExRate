@@ -22,7 +22,7 @@ class Api(_Api):
         currency_alias = pbank_aliases_map[from_currency]
         for Valute in response_data:
             if Valute == currency_alias:
-                return float('Value')
+                return float('Value')             
 
         raise ValueError("Invalid PBank response: {currency_pbank_alias} not found")
 

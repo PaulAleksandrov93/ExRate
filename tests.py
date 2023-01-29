@@ -9,16 +9,16 @@ from api import cbr_json_api
 from api import cbr_xml_api
 
 
-def get_pbank_response(*newargs, **newkeywargs):
+# def get_pbank_response(*newargs, **newkeywargs):
 
-    class Response:
-        def __init__(self, response):
-            self.text = json.dumps(response)
+#     class Response:
+#         def __init__(self, response):
+#             self.text = json.dumps(response)
         
-        def json(self):
-            return json.loads(self.text)
+#         def json(self):
+#             return json.loads(self.text)
     
-    return Response([{"ccy":"USD","base_ccy":"UAH","sale":"30"}])
+#     return Response([{"ccy":"USD","base_ccy":"UAH","sale":"30"}])
 
 class Test(unittest.TestCase):
     def setUp(self):
