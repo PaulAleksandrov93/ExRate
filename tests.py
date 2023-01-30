@@ -46,24 +46,24 @@ class Test(unittest.TestCase):
 
         self.assertIn('{"ccy":"USD","base_ccy":"UAH",', api_log.response_text)
     
-    # def test_pbank_btc(self):
+    def test_pbank_btc(self):
 
-    #     xrate = models.XRate.get(from_currency=1000, to_currency=840)
-    #     updated_before = xrate.updated
-    #     self.assertEqual(xrate.rate, 1.0)
+        xrate = models.XRate.get(from_currency=1000, to_currency=840)
+        updated_before = xrate.updated
+        self.assertEqual(xrate.rate, 1.0)
 
-    #     cbr_json_api.Api().update_rate(1000, 840)
+        cbr_json_api.Api().update_rate(1000, 840)
 
-    #     xrate = models.XRate.get(from_currency=1000, to_currency=840)
-    #     updated_after = xrate.updated
+        xrate = models.XRate.get(from_currency=1000, to_currency=840)
+        updated_after = xrate.updated
 
-    #     self.assertGreater(xrate.rate, 5000)
-    #     self.assertGreater(updated_after, updated_before)
+        self.assertGreater(xrate.rate, 5000)
+        self.assertGreater(updated_after, updated_before)
 
-    #     api_log = models.ApiLog.select().order_by(models.ApiLog.created.desc()).first()
+        api_log = models.ApiLog.select().order_by(models.ApiLog.created.desc()).first()
 
-    #     self.assertIsNotNone(api_log)
-    #     self.assertEqual(api_log.request_url, "https://www.cbr-xml-daily.ru/daily_json.js")
+        self.assertIsNotNone(api_log)
+        self.assertEqual(api_log.request_url, "https://www.cbr-xml-daily.ru/daily_json.js")
              
 
     def test_cbr(self):
