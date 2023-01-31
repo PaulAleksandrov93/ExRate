@@ -87,28 +87,28 @@ class Test(unittest.TestCase):
 
         self.assertIn("<NumCode>840</NumCode>", api_log.response_text) 
 
-    # @patch('api._Api._send', new=get_pbank_response)
-    # def test_pbank_mock(self):
+    @patch('api._Api._send', new=get_pbank_response)
+    def test_pbank_mock(self):
         
-    #     xrate = models.XRate.get(id=1)
-    #     updated_before = xrate.updated
-    #     self.assertEqual(xrate.rate, 1.0)
+        xrate = models.XRate.get(id=1)
+        updated_before = xrate.updated
+        self.assertEqual(xrate.rate, 1.0)
 
-    #     pbank_api.Api().update_rate(840, 980)
+        pbank_api.Api().update_rate(840, 980)
 
-    #     xrate = models.XRate.get(id=1)
-    #     updated_after = xrate.updated
+        xrate = models.XRate.get(id=1)
+        updated_after = xrate.updated
 
-    #     self.assertEqual(xrate.rate, 30)
-    #     self.assertGreater(updated_after, updated_before)
+        self.assertEqual(xrate.rate, 30)
+        self.assertGreater(updated_after, updated_before)
 
-    #     api_log = models.ApiLog.select().order_by(models.ApiLog.created.desc()).first()
+        api_log = models.ApiLog.select().order_by(models.ApiLog.created.desc()).first()
 
-    #     self.assertIsNotNone(api_log)
-    #     self.assertEqual(api_log.request_url, "https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11")
-    #     self.assertIsNotNone(api_log.response_text)
+        self.assertIsNotNone(api_log)
+        self.assertEqual(api_log.request_url, "https://www.cbr-xml-daily.ru/daily_json.js")
+        self.assertIsNotNone(api_log.response_text)
 
-    #     self.assertEqual('[{"ccy":"USD","base_ccy":"UAH","sale":"30"}]', api_log.response_text)
+        self.assertEqual('[{"ccy":"USD","base_ccy":"UAH","sale":"30"}]', api_log.response_text)
 
     def test_api_error(self):
         api.HTTP_TIMEOUT = 15
