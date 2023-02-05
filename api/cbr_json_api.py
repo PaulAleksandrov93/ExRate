@@ -8,14 +8,14 @@ class Api(_Api):
         rate = self._get_pbank_rate(xrate.from_currency)
         return rate
 
-    def _get_pbank_rate(self, from_currency):
-        response = self._send_request(url="https://www.cbr-xml-daily.ru/daily_json.js", method="get")
+    # def _get_pbank_rate(self, from_currency):
+    #     response = self._send_request(url="https://www.cbr-xml-daily.ru/daily_json.js", method="get")
 
-        response_json = response.json()
-        self.log.debug("CbrJson response: %s" % response_json)
-        rate = self._find_rate(response_json, from_currency)
+    #     response_json = response.json()
+    #     self.log.debug("CbrJson response: %s" % response_json)
+    #     rate = self._find_rate(response_json, from_currency)
 
-        return rate
+    #     return rate
 
     def _find_rate(self, response_data, from_currency):
         pbank_aliases_map = {840: "USD"}
