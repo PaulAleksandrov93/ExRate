@@ -10,4 +10,4 @@ def hello():
     return "Hello world"
 
 
-app.run()
+app.run(host="0.0.0.0")
